@@ -10,23 +10,16 @@
 <style>
   :root{
     --bg:#0a0a0a; --panel:#0f0f10; --fg:#f8f8f8; --muted:#bdbdbd; --edge:#232323;
-    --orange:#ff7a00; --orange-2:#ffb366;                   /* gold/orange (donut, CTAs) */
-    --gold:#ffe0a6;                                        /* warm gold text/accent     */
-    --money:#18e07a; --money-2:#72ffbb;                    /* green (P2E tiles)         */
+    --orange:#ff7a00; --orange-2:#ffb366;
+    --gold:#ffe0a6;
+    --money:#18e07a; --money-2:#72ffbb;
+    --violet:#8b5cf6; --violet-2:#c4b5fd;
     --radius:20px; --container:1240px;
-
-    /* 8pt-ish rhythm */
     --s-1:10px; --s-2:16px; --s-3:24px; --s-4:36px; --s-5:56px; --s-6:88px; --s-7:120px;
-
-    /* fluid type */
-    --fs-hero: clamp(40px, 6vw, 74px);
-    --fs-h2: clamp(26px, 3vw, 36px);
-    --fs-body: clamp(16px, 1.45vw, 18.5px);
+    --fs-hero: clamp(40px, 6vw, 74px); --fs-h2: clamp(26px, 3vw, 36px); --fs-body: clamp(16px, 1.45vw, 18.5px);
   }
-
   *{box-sizing:border-box}
   html,body{height:100%}
-  html{scroll-behavior:smooth} /* smooth anchor jumps */
   body{
     margin:0;background:
       radial-gradient(1200px 800px at 50% -10%, #171717 0%, var(--bg) 60%),
@@ -35,7 +28,6 @@
   }
   a{color:inherit;text-decoration:none}
   .container{max-width:var(--container);margin:0 auto;padding:0 var(--s-3)}
-  section{padding:var(--s-7) 0; scroll-margin-top:90px} /* offset for sticky header */
 
   /* Header */
   header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(10,10,10,.82), rgba(10,10,10,.46));backdrop-filter:saturate(130%) blur(8px);border-bottom:1px solid #131313}
@@ -51,31 +43,31 @@
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
     padding:12px 16px;border-radius:14px;cursor:pointer;font-weight:900;
     background:#151515;border:1px solid var(--edge);color:var(--fg);
-    transition:transform .18s ease, box-shadow .22s ease, background .2s ease, filter .2s ease;
+    transition:transform .15s ease, box-shadow .2s ease, background .2s ease, filter .2s ease;
     position:relative;isolation:isolate;
   }
   .btn:hover{transform:translateY(-1px)}
   .btn.glow{background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#111;border:0;box-shadow:0 10px 28px rgba(255,122,0,.28), 0 0 0 1px rgba(255,122,0,.25) inset}
   .btn.glow:hover{box-shadow:0 14px 40px rgba(255,122,0,.4), 0 0 0 1px rgba(255,122,0,.25) inset;filter:saturate(110%)}
   .btn.small{padding:8px 12px;font-size:13px}
-  .emoji{margin-left:4px}
 
-  /* Panels */
+  /* Sections & Panels */
+  section{padding:var(--s-7) 0}
+  .section-tight{padding:var(--s-6) 0}
   .panel{background:var(--panel);border:1px solid var(--edge);border-radius:var(--radius);padding:clamp(18px,2vw,26px);position:relative}
 
-  /* Gold glow border (generic) */
+  /* Glow borders */
   .glow-border{
     border-color:rgba(255,190,110,.45) !important;
     box-shadow:0 0 0 2px rgba(255,190,110,.45), 0 0 28px rgba(255,140,0,.32);
-    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   }
   .glow-border:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 0 0 2px rgba(255,204,140,.7), 0 0 42px rgba(255,140,0,.5)}
 
-  /* GREEN glow border — for the 3 tiles */
   .tile-glow{
     border-color:rgba(30,255,150,.45) !important;
-    box-shadow:0 0 0 2px rgba(30,255,150,.45), 0 0 30px rgba(24,224,122,.32), 0 0 18px rgba(255,190,110,.15) inset;
-    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    box-shadow:0 0 0 2px rgba(30,255,150,.45),0 0 30px rgba(24,224,122,.32),0 0 18px rgba(255,190,110,.15) inset;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   }
   .tile-glow:hover{transform:translateY(-4px);box-shadow:0 0 0 2px rgba(30,255,150,.65), 0 0 40px rgba(24,224,122,.45), 0 0 22px rgba(255,190,110,.25) inset}
 
@@ -85,16 +77,15 @@
       radial-gradient(60vmax 30vmax at -10% 100%, rgba(255,122,0,.06), transparent 60%)}
   .hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:var(--s-5)}
   .kicker{font-size:12px;letter-spacing:.6px;font-weight:900;color:#ffd7b0;text-transform:uppercase}
-  .hero h1{margin:.35em 0 .25em;font-size:var(--fs-hero);line-height:1.04;font-weight:900;letter-spacing:.5px;color:#fff;text-shadow:0 0 40px rgba(255,122,0,.12);text-wrap:balance}
+  .hero h1{margin:.35em 0 .25em;font-size:var(--fs-hero);line-height:1.04;font-weight:900;letter-spacing:.5px;color:#fff;text-shadow:0 0 40px rgba(255,122,0,.12)}
   .lead{color:var(--muted);max-width:68ch}
   .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:var(--s-3)}
   .contract{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted)}
   .tag{display:inline-block;background:#161616;border:1px solid var(--edge);padding:4px 10px;border-radius:999px;font-weight:800;font-size:12.5px}
-
   .hero-media{border-radius:24px;overflow:hidden;border:1px solid var(--edge);background:#0b0b0b;box-shadow:0 40px 140px rgba(0,0,0,.6)}
-  .hero-media img,.hero-media video{width:100%;display:block;object-fit:cover;height:min(70vh,680px)}
+  .hero-media img{width:100%;display:block;object-fit:cover;height:min(70vh,680px)}
 
-  /* Tokenomics grid */
+  /* Tokenomics */
   .grid-2{display:grid;grid-template-columns:1.06fr .94fr;gap:var(--s-5)}
   .facts{display:grid;gap:var(--s-2);grid-template-columns:repeat(2,minmax(0,1fr));margin-top:var(--s-3)}
   .fact{background:#121212;border:1px solid var(--edge);border-radius:14px;padding:16px 18px}
@@ -102,59 +93,73 @@
   .fact .v{font-size:22px;font-weight:900;margin-top:6px}
   .donut-wrap{display:grid;place-items:center;min-height:380px;text-align:center}
 
-  /* GOLD DONUT */
+  /* Donut */
   .chart{width:min(430px, 64vw)}
   .chart .ring{stroke:#2a2a2a}
   .chart .slice{
     stroke:url(#gradOrange);
     filter:drop-shadow(0 0 16px rgba(255,122,0,.35));
     stroke-linecap:round;
-    stroke-dashoffset: var(--circ,1000);     /* initial (hidden) */
+    stroke-dashoffset: var(--circ,1000);
   }
-  /* animate only when .animate is added; bigger delay & slower duration */
-  .chart.animate .slice{
-    animation:reveal 2.8s cubic-bezier(.2,.8,.2,1) var(--delay,2.2s) forwards;
-  }
-  @keyframes reveal{ to{ stroke-dashoffset: 0 } }
+  .chart.animate .slice{animation:reveal 2.6s cubic-bezier(.2,.8,.2,1) var(--delay,1.9s) forwards}
+  @keyframes reveal{to{stroke-dashoffset:0}}
   .chart .center{fill:#0f0f10;stroke:#3a3a3a}
   .chart text{font:900 16px/1 Inter, system-ui, Arial;fill:white}
   .chart .label{font-size:20px}
   .chart .line{stroke:#fff;stroke-opacity:.7;stroke-linecap:round}
 
-  /* P2E — hero-like header, centered content */
-  .p2e{display:grid;gap:28px;align-items:center;padding:40px var(--s-4);text-align:center}
-  .p2e-inner{max-width:1180px;margin:0 auto;width:100%}
-  .p2e-hero{
-    margin:.1em 0 .2em;
-    font:900 clamp(40px,5.6vw,72px)/1.05 Inter,system-ui;
-    letter-spacing:.8px;text-transform:uppercase;text-wrap:balance;
-    background:linear-gradient(90deg,var(--gold), var(--money-2), var(--money));
+  /* P2E steps */
+  .p2e{display:grid;gap:28px;align-items:center;padding:32px var(--s-4);text-align:center}
+  .p2e-head{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .p2e-h{
+    margin:0;font:900 clamp(20px,2.6vw,28px)/1 Inter,system-ui;letter-spacing:.8px;text-transform:uppercase;
+    background:linear-gradient(90deg,var(--money-2), var(--gold), var(--money));
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 0 26px rgba(24,224,122,.28), 0 0 22px rgba(255,190,110,.28);
+    text-shadow:0 0 22px rgba(24,224,122,.25), 0 0 18px rgba(255,190,110,.25);
   }
-  .p2e-sub{color:#cfeadc;margin:2px 0 8px}
-  .p2e-prize{font:900 clamp(22px,3vw,34px)/1.2 Inter, system-ui; color:var(--gold); text-shadow:0 0 22px rgba(255,190,110,.35)}
+  .p2e-title{font:900 clamp(22px,3vw,34px)/1.2 Inter, system-ui; color:var(--gold); text-shadow:0 0 22px rgba(255,190,110,.35)}
+  .p2e-sub{color:#cfeadc}
+  .p2e-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:8px}
+  .step{background:#101412;border:1px solid #213b2b;border-radius:16px;padding:26px}
+  .step h4{margin:0 0 10px;font-size:19px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;text-shadow:0 0 16px rgba(24,224,122,.22), 0 0 10px rgba(255,190,110,.18)}
+  .step h4::after{content:"";display:block;width:88px;height:3px;margin:12px auto 6px;border-radius:999px;background:linear-gradient(90deg, transparent, var(--money), var(--gold), transparent);box-shadow:0 0 14px rgba(24,224,122,.55), 0 0 18px rgba(255,190,110,.35)}
+  .step p{margin:0;color:#cfeadc}
 
-  .p2e-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:16px;align-items:stretch}
-  .step{background:#101412;border:1px solid #213b2b;border-radius:16px;padding:28px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:220px}
-  .step h4{
-    margin:0 0 10px;
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:.6px;
-    text-transform:uppercase;
-    text-shadow:0 0 16px rgba(24,224,122,.22), 0 0 10px rgba(255,190,110,.18);
+  /* ROADMAP — rebuilt as rows for perfect alignment */
+  .roadmap-wrap{
+    padding-top:var(--s-6);padding-bottom:var(--s-6);
+    background:
+      radial-gradient(70vmax 30vmax at 50% -20%, rgba(139,92,246,.08), transparent 60%),
+      radial-gradient(80vmax 40vmax at 50% 120%, rgba(24,224,122,.06), transparent 60%);
+    border-top:1px solid #131313;border-bottom:1px solid #131313;
     position:relative;
   }
-  /* underline gradient green -> gold */
-  .step h4::after{
-    content:"";
-    display:block;
-    width:92px;height:3px;margin:12px auto 6px;border-radius:999px;
-    background:linear-gradient(90deg, transparent, var(--money), var(--gold), transparent);
-    box-shadow:0 0 14px rgba(24,224,122,.55), 0 0 18px rgba(255,190,110,.35);
-  }
-  .step p{margin:0;color:#cfeadc}
+  .rm-title{margin:0 0 8px;text-align:center;font:900 clamp(28px,4.5vw,48px)/1.1 Inter;}
+  .rm-title span{background:linear-gradient(90deg,var(--gold),var(--money),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(255,190,110,.25),0 0 18px rgba(24,224,122,.2)}
+  .rm-sub{color:var(--muted);text-align:center;max-width:70ch;margin:0 auto var(--s-5)}
+
+  .rm-grid{position:relative;display:grid;row-gap:36px}
+  .rm-line{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:6px;border-radius:999px;background:linear-gradient(180deg, rgba(255,190,110,.35), rgba(24,224,122,.4), rgba(139,92,246,.35));box-shadow:0 0 22px rgba(255,190,110,.25),0 0 18px rgba(24,224,122,.25),0 0 22px rgba(139,92,246,.25) inset}
+
+  .rm-row{display:grid;grid-template-columns:1fr 60px 1fr;column-gap:28px;align-items:center}
+  .rm-card{position:relative;background:#0f1114;border:1px solid #1f2a26;border-radius:18px;padding:28px 26px 22px;box-shadow:0 18px 48px rgba(0,0,0,.35)}
+  .rm-card h4{margin:6px 0 10px;font-size:22px}
+  .rm-card ul{margin:0;padding-left:18px;color:#dfeee9;line-height:1.7}
+  .rm-badge{display:inline-flex;align-items:center;gap:8px;background:#141018;border:1px solid rgba(139,92,246,.45);color:#e9ddff;padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.4px;box-shadow:0 0 22px rgba(139,92,246,.25)}
+  .rm-badge.gold{background:#18120b;border-color:rgba(255,190,110,.5);color:#ffefcf;box-shadow:0 0 22px rgba(255,190,110,.22)}
+  .rm-badge.green{background:#0f1613;border-color:rgba(24,224,122,.45);color:#d9ffef;box-shadow:0 0 22px rgba(24,224,122,.22)}
+
+  /* Arrow pointers */
+  .rm-card.left::after,
+  .rm-card.right::after{content:"";position:absolute;top:28px;width:0;height:0;border:10px solid transparent;filter:drop-shadow(0 0 8px rgba(24,224,122,.2))}
+  .rm-card.left::after{right:-20px;border-left-color:#1f2a26}
+  .rm-card.right::after{left:-20px;border-right-color:#1f2a26}
+
+  .rm-dot{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#0b0b0b;background:radial-gradient(circle at 30% 30%, var(--violet-2), var(--violet));box-shadow:0 0 0 4px rgba(196,181,253,.7),0 0 34px rgba(139,92,246,.5)}
+  .rm-dot::after{content:attr(data-step);font-size:20px}
+  @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 4px rgba(196,181,253,.7),0 0 34px rgba(139,92,246,.5)}50%{transform:scale(1.05);box-shadow:0 0 0 6px rgba(196,181,253,.9),0 0 46px rgba(139,92,246,.75)}}
+  .rm-dot{animation:pulse 2.4s infinite ease-in-out}
 
   /* Why */
   .why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5)}
@@ -169,19 +174,27 @@
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
   .reveal.show{opacity:1;transform:none}
 
-  /* prefers-reduced-motion: disable fancy movement */
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto}
-    .reveal{opacity:1;transform:none;transition:none}
-    .btn,.glow-border,.tile-glow{transition:none}
-    .chart.animate .slice{animation:none;stroke-dashoffset:0}
+  /* Phantom banner (hidden unless Play click) */
+  .notice{position:sticky;top:64px;z-index:60}
+  .notice.hidden{display:none}
+  .notice-inner{
+    margin:0 auto;max-width:var(--container);padding:14px var(--s-3);
+    background:linear-gradient(180deg,#121212,#0e0f0f);
+    border:1px solid var(--edge);border-radius:14px;
+    box-shadow:0 10px 28px rgba(0,0,0,.35), 0 0 30px rgba(24,224,122,.08);
+    display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap
   }
+  .notice-inner strong{font-weight:900;letter-spacing:.3px}
+  .notice-inner p{margin:0;color:var(--muted)}
 
-  /* responsive */
   @media (max-width:1060px){
     .hero-grid,.grid-2,.why,.p2e-steps{grid-template-columns:1fr}
     .hero{min-height:92vh}
-    .hero-media img,.hero-media video{height:56vh}
+    .hero-media img{height:56vh}
+    .rm-row{grid-template-columns:1fr}
+    .rm-line{display:none}
+    .rm-dot{justify-self:center}
+    .rm-card.left::after,.rm-card.right::after{display:none}
   }
 </style>
 </head>
@@ -198,11 +211,29 @@
     </div>
     <nav>
       <a class="btn" href="#tokenomics">Tokenomics 🎃</a>
+      <a class="btn" href="#p2e">P2E</a>
+      <a class="btn" href="#roadmap">Roadmap</a>
       <a class="btn" href="#why">About</a>
       <a class="btn glow" id="playTop" href="#play">▶ Play</a>
     </nav>
   </div>
 </header>
+
+<!-- Phantom Notice (hidden unless needed) -->
+<div id="phantomNotice" class="notice hidden">
+  <div class="notice-inner">
+    <div>
+      <strong id="noticeTitle">Phantom required</strong>
+      <p id="noticeText">Install Phantom to connect your wallet.</p>
+    </div>
+    <div class="notice-actions">
+      <a id="btnOpenInPhantom" class="btn glow" target="_blank" rel="noopener">Open in Phantom</a>
+      <a id="btnInstallIOS" class="btn" target="_blank" rel="noopener">Get iOS</a>
+      <a id="btnInstallAndroid" class="btn" target="_blank" rel="noopener">Get Android</a>
+      <button id="btnDismissNotice" class="btn small">Dismiss</button>
+    </div>
+  </div>
+</div>
 
 <main>
   <!-- HERO -->
@@ -263,7 +294,6 @@
         <p class="muted centered" style="margin-top:var(--s-3)">• No private sale • No team allocation • No mint authority.</p>
       </div>
 
-      <!-- Donut (gold) — animates once on scroll with bigger delay + slower -->
       <div class="panel donut-wrap glow-border reveal">
         <svg class="chart" viewBox="0 0 220 220" role="img" aria-label="Community 100%">
           <defs>
@@ -272,44 +302,146 @@
               <stop offset="100%" stop-color="#ff7a00"/>
             </linearGradient>
           </defs>
-          <!-- circumference ≈ 552.92 -->
-          <circle class="ring" cx="110" cy="110" r="88" fill="none" stroke-width="20"/>
-          <circle class="slice" cx="110" cy="110" r="88" fill="none" stroke-width="20"
-                  stroke-dasharray="552.92" style="--circ:552.92"
-                  transform="rotate(-90 110 110)"/>
-          <circle class="center" cx="110" cy="110" r="70"/>
-          <line class="line" x1="110" y1="110" x2="200" y2="110" stroke-width="2"/>
-          <text class="label" x="60" y="116">100%</text>
-          <text x="110" y="146" text-anchor="middle" fill="#bdbdbd" style="font-weight:700">Community</text>
+        <circle class="ring" cx="110" cy="110" r="88" fill="none" stroke-width="20"/>
+        <circle class="slice" cx="110" cy="110" r="88" fill="none" stroke-width="20"
+                stroke-dasharray="552.92" style="--circ:552.92"
+                transform="rotate(-90 110 110)"/>
+        <circle class="center" cx="110" cy="110" r="70"/>
+        <line class="line" x1="110" y1="110" x2="200" y2="110" stroke-width="2"/>
+        <text class="label" x="60" y="116">100%</text>
+        <text x="110" y="146" text-anchor="middle" fill="#bdbdbd" style="font-weight:700">Community</text>
         </svg>
       </div>
     </div>
   </section>
 
-  <!-- P2E / Weekly prize -->
+  <!-- P2E -->
   <section class="section-tight" id="p2e">
     <div class="container">
       <div class="panel p2e glow-border reveal">
-        <div class="p2e-inner">
-          <h2 class="p2e-hero">PLAY-TO-EARN — WEEKLY</h2>
-          <div class="p2e-sub">Hold #1 when the week ends → payout in <b>SOL</b> to your wallet.</div>
-          <div class="p2e-prize">This Week’s Prize: <span style="color:var(--gold)">TBD SOL</span></div>
+        <div class="p2e-head">
+          <h3 class="p2e-h">P2E • WEEKLY</h3>
+          <div class="p2e-sub">Hold #1 when the week ends → payout in SOL to your wallet.</div>
+          <div class="p2e-title">This Week’s Prize: <span style="color:var(--gold)">TBD SOL</span></div>
+        </div>
 
-          <div class="p2e-steps">
-            <div class="step tile-glow">
-              <h4>1) PLAY & CLIMB</h4>
-              <p>Jump in, rack up points, and push for the #1 score on the global board.</p>
-            </div>
-            <div class="step tile-glow">
-              <h4>2) VERIFY WITH WALLET</h4>
-              <p>Sign with Phantom to submit scores. <b>No wallet → no rank.</b></p>
-            </div>
-            <div class="step tile-glow">
-              <h4>3) GET PAID IN SOL</h4>
-              <p>Leaderboard resets weekly (UTC). The top wallet at snapshot receives the SOL prize.</p>
-            </div>
+        <div class="p2e-steps">
+          <div class="step tile-glow">
+            <h4>1) PLAY & CLIMB</h4>
+            <p>Jump in, rack up points, and push for the #1 score on the global board.</p>
+          </div>
+          <div class="step tile-glow">
+            <h4>2) VERIFY WITH WALLET</h4>
+            <p>Sign with Phantom to submit scores. <b>No wallet → no rank.</b></p>
+          </div>
+          <div class="step tile-glow">
+            <h4>3) GET PAID IN SOL</h4>
+            <p>Leaderboard resets weekly (UTC). The top wallet at snapshot receives the SOL prize.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP (rows, no duplicates) -->
+  <section id="roadmap" class="roadmap-wrap">
+    <div class="container">
+      <h2 class="rm-title reveal"><span>Roadmap</span></h2>
+      <p class="rm-sub reveal">Phases from ignition to global expansion. Dates are flexible—weekly prize cycles first.</p>
+
+      <div class="rm-grid reveal">
+        <div class="rm-line"></div>
+
+        <!-- Row 1 -->
+        <div class="rm-row">
+          <div class="rm-card left">
+            <span class="rm-badge">Phase 1 • Community Ignition</span>
+            <h4>Set the stage</h4>
+            <ul>
+              <li>Open X + Telegram, teaser clips</li>
+              <li>Explain weekly SOL prize format</li>
+              <li>Early sign-ups for beta access</li>
+            </ul>
+          </div>
+          <div class="rm-dot" data-step="1"></div>
+          <div></div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="rm-row">
+          <div></div>
+          <div class="rm-dot" data-step="2"></div>
+          <div class="rm-card right">
+            <span class="rm-badge gold">Phase 2 • Web Reveal</span>
+            <h4>Make it real</h4>
+            <ul>
+              <li>Site live: hero, P2E rules, tokenomics (0/0, 100% LP burn)</li>
+              <li>How to play: Phantom required; mobile via Phantom in-app</li>
+              <li>FAQ / Lightpaper</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="rm-row">
+          <div class="rm-card left">
+            <span class="rm-badge green">Phase 3 • Game Goes Live</span>
+            <h4>Score submits count</h4>
+            <ul>
+              <li>Wallet-signed scores + global leaderboard</li>
+              <li>Dry-run week: snapshot → payout test</li>
+              <li>Basic anti-cheat thresholds</li>
+            </ul>
+          </div>
+          <div class="rm-dot" data-step="3"></div>
+          <div></div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="rm-row">
+          <div></div>
+          <div class="rm-dot" data-step="4"></div>
+          <div class="rm-card right">
+            <span class="rm-badge green">Phase 4 • Pre-Launch</span>
+            <h4>Tighten the loop</h4>
+            <ul>
+              <li>Snapshot job (UTC) + payout queue with tx links</li>
+              <li>Creator mini-tournaments</li>
+              <li>Winners page (wallet, score, tx)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="rm-row">
+          <div class="rm-card left">
+            <span class="rm-badge gold">Phase 5 • Token Launch</span>
+            <h4>Fuel + visibility</h4>
+            <ul>
+              <li>0/0 tax, 100% LP burn, community-owned</li>
+              <li>Listings/analytics; site CTAs (Buy / Chart / CA)</li>
+              <li>Utility: cosmetics, seasons, events</li>
+            </ul>
+          </div>
+          <div class="rm-dot" data-step="5"></div>
+          <div></div>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="rm-row">
+          <div></div>
+          <div class="rm-dot" data-step="6"></div>
+          <div class="rm-card right">
+            <span class="rm-badge">Phase 6 • Global Expansion</span>
+            <h4>Seasons & sponsors</h4>
+            <ul>
+              <li>Seasonal modes + cosmetic badges for Top 10</li>
+              <li>Sponsored prize weeks & themed leaderboards</li>
+              <li>Creator portal & community tournaments</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -367,50 +499,61 @@
 </footer>
 
 <script>
-/* ====== Replace if needed ====== */
-const PLAY_URL = "https://pump-gyatt-game.vercel.app/";  // your game URL
-const CA       = "COMING SOON";                           // contract display
-/* ================================= */
+const PLAY_URL = "https://pump-gyatt-game.vercel.app/";
+const CA       = "COMING SOON";
 
-/* wire up play buttons + contract text */
-["playTop","playHero","playCta"].forEach(id => {
-  const el = document.getElementById(id); if (el) el.href = PLAY_URL;
-});
-["caText","caText2"].forEach(id => {
-  const el = document.getElementById(id); if (el) el.textContent = CA;
-});
+/* Links & contract text */
+["playTop","playHero","playCta"].forEach(id => { const el = document.getElementById(id); if (el) el.href = PLAY_URL; });
+["caText","caText2"].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = CA; });
 
-/* copy helpers with glow pulse */
-function pulse(node){
-  const prev = node.style.boxShadow;
-  node.style.boxShadow = "0 0 0 3px rgba(255,122,0,.25), " + (getComputedStyle(node).boxShadow || "");
-  setTimeout(()=> node.style.boxShadow = prev, 340);
-}
-function copyCA(btn){ navigator.clipboard.writeText(CA).then(()=>pulse(btn)); }
-["copyCA","copyCA2","copyCA3"].forEach(id=>{
-  const el=document.getElementById(id); if(el) el.addEventListener("click",()=>copyCA(el));
-});
+/* Copy CA */
+function pulse(n){const p=n.style.boxShadow;n.style.boxShadow="0 0 0 3px rgba(255,122,0,.25), "+(getComputedStyle(n).boxShadow||"");setTimeout(()=>n.style.boxShadow=p,340)}
+function copyCA(btn){navigator.clipboard.writeText(CA).then(()=>pulse(btn))}
+["copyCA","copyCA2","copyCA3"].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener("click",()=>copyCA(el));});
 
-/* reveal-on-scroll (panels/text) */
-const io = new IntersectionObserver((ents)=>{
-  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("show"); io.unobserve(e.target); }});
-},{threshold:.12});
+/* Reveal-on-scroll */
+const io = new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){e.target.classList.add("show");io.unobserve(e.target);}})},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(n=>io.observe(n));
 
-/* DONUT: animate once when visible, with a bigger delay and slower speed */
+/* Donut animate once */
 const donut = document.querySelector(".chart");
 if (donut){
-  donut.style.setProperty("--delay","2.2s"); // CSS delay before reveal starts
-  const dIO = new IntersectionObserver((ents)=>{
-    ents.forEach(e=>{
-      if(e.isIntersecting){
-        setTimeout(()=> donut.classList.add("animate"), 700); // extra JS buffer
-        dIO.disconnect();
-      }
-    });
+  donut.style.setProperty("--delay","1.9s");
+  const dIO = new IntersectionObserver(ents=>{
+    ents.forEach(e=>{ if(e.isIntersecting){ setTimeout(()=>donut.classList.add("animate"),650); dIO.disconnect(); }});
   },{threshold:.45});
   dIO.observe(donut);
 }
+
+/* Phantom banner only if needed on Play */
+const DAPP_URL = location.origin + location.pathname;
+const PHANTOM_OPEN = `https://phantom.app/ul/browse/${encodeURIComponent(DAPP_URL)}`;
+const PHANTOM_IOS  = "https://apps.apple.com/app/phantom-crypto-wallet/id1598432977";
+const PHANTOM_AND  = "https://play.google.com/store/apps/details?id=app.phantom&hl=en";
+function isMobileUA(){ return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent); }
+function isPhantomInstalled(){ return !!(window.solana && window.solana.isPhantom); }
+function isPhantomInApp(){ return /Phantom/i.test(navigator.userAgent); }
+function showPhantomNotice(kind){
+  const root = document.getElementById("phantomNotice");
+  const title = document.getElementById("noticeTitle");
+  const text  = document.getElementById("noticeText");
+  const open  = document.getElementById("btnOpenInPhantom");
+  const iOS   = document.getElementById("btnInstallIOS");
+  const andr  = document.getElementById("btnInstallAndroid");
+  if (kind === "install"){ title.textContent="Phantom required"; text.textContent="Install Phantom to connect your wallet."; open.style.display="none";}
+  if (kind === "open"){ title.textContent="Open in Phantom"; text.innerHTML="On mobile, play inside the Phantom app for wallet sign-in."; open.href=PHANTOM_OPEN; open.style.display="inline-flex";}
+  iOS.href=PHANTOM_IOS; andr.href=PHANTOM_AND; root.classList.remove("hidden");
+}
+["playTop","playHero","playCta"].forEach(id=>{
+  const el=document.getElementById(id); if(!el) return;
+  el.addEventListener("click",e=>{
+    const mobile=isMobileUA(), hasPh=isPhantomInstalled(), inPh=isPhantomInApp();
+    if(mobile && hasPh && !inPh){ e.preventDefault(); showPhantomNotice("open"); }
+    if(mobile && !hasPh){ e.preventDefault(); showPhantomNotice("install"); }
+  });
+});
+const dismiss = document.getElementById("btnDismissNotice");
+if (dismiss) dismiss.addEventListener("click",()=>document.getElementById("phantomNotice").classList.add("hidden"));
 </script>
 </body>
 </html>
