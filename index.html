@@ -122,11 +122,14 @@
   .p2e-sub{color:#cfeadc}
   .p2e-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:8px}
   .step{background:#101412;border:1px solid #213b2b;border-radius:16px;padding:26px}
-  .step h4{margin:0 0 10px;font-size:19px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;text-shadow:0 0 16px rgba(24,224,122,.22), 0 0 10px rgba(255,190,110,.18)}
+  .step h4{
+    margin:0 0 10px;font-size:19px;font-weight:900;letter-spacing:.6px;
+    text-transform:uppercase;text-shadow:0 0 16px rgba(24,224,122,.22), 0 0 10px rgba(255,190,110,.18)
+  }
   .step h4::after{content:"";display:block;width:88px;height:3px;margin:12px auto 6px;border-radius:999px;background:linear-gradient(90deg, transparent, var(--money), var(--gold), transparent);box-shadow:0 0 14px rgba(24,224,122,.55), 0 0 18px rgba(255,190,110,.35)}
   .step p{margin:0;color:#cfeadc}
 
-  /* ROADMAP — rebuilt as rows for perfect alignment */
+  /* ROADMAP — rows, with phase states (active vs future) */
   .roadmap-wrap{
     padding-top:var(--s-6);padding-bottom:var(--s-6);
     background:
@@ -135,7 +138,7 @@
     border-top:1px solid #131313;border-bottom:1px solid #131313;
     position:relative;
   }
-  .rm-title{margin:0 0 8px;text-align:center;font:900 clamp(28px,4.5vw,48px)/1.1 Inter;}
+  .rm-title{margin:0 0 8px;text-align:center;font:900 clamp(28px,4.5vw,48px)/1.1 Inter}
   .rm-title span{background:linear-gradient(90deg,var(--gold),var(--money),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(255,190,110,.25),0 0 18px rgba(24,224,122,.2)}
   .rm-sub{color:var(--muted);text-align:center;max-width:70ch;margin:0 auto var(--s-5)}
 
@@ -143,8 +146,13 @@
   .rm-line{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:6px;border-radius:999px;background:linear-gradient(180deg, rgba(255,190,110,.35), rgba(24,224,122,.4), rgba(139,92,246,.35));box-shadow:0 0 22px rgba(255,190,110,.25),0 0 18px rgba(24,224,122,.25),0 0 22px rgba(139,92,246,.25) inset}
 
   .rm-row{display:grid;grid-template-columns:1fr 60px 1fr;column-gap:28px;align-items:center}
-  .rm-card{position:relative;background:#0f1114;border:1px solid #1f2a26;border-radius:18px;padding:28px 26px 22px;box-shadow:0 18px 48px rgba(0,0,0,.35)}
-  .rm-card h4{margin:6px 0 10px;font-size:22px}
+  .rm-card{
+    position:relative;background:#0f1114;border:1px solid #1f2a26;border-radius:18px;padding:28px 26px 22px;
+    box-shadow:0 18px 48px rgba(0,0,0,.35);
+  }
+  .rm-card h4{
+    margin:6px 0 10px;font-size:22px;font-weight:900;letter-spacing:.6px;text-transform:uppercase
+  }
   .rm-card ul{margin:0;padding-left:18px;color:#dfeee9;line-height:1.7}
   .rm-badge{display:inline-flex;align-items:center;gap:8px;background:#141018;border:1px solid rgba(139,92,246,.45);color:#e9ddff;padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.4px;box-shadow:0 0 22px rgba(139,92,246,.25)}
   .rm-badge.gold{background:#18120b;border-color:rgba(255,190,110,.5);color:#ffefcf;box-shadow:0 0 22px rgba(255,190,110,.22)}
@@ -156,10 +164,15 @@
   .rm-card.left::after{right:-20px;border-left-color:#1f2a26}
   .rm-card.right::after{left:-20px;border-right-color:#1f2a26}
 
+  /* Dots & states */
   .rm-dot{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-weight:900;color:#0b0b0b;background:radial-gradient(circle at 30% 30%, var(--violet-2), var(--violet));box-shadow:0 0 0 4px rgba(196,181,253,.7),0 0 34px rgba(139,92,246,.5)}
   .rm-dot::after{content:attr(data-step);font-size:20px}
   @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 4px rgba(196,181,253,.7),0 0 34px rgba(139,92,246,.5)}50%{transform:scale(1.05);box-shadow:0 0 0 6px rgba(196,181,253,.9),0 0 46px rgba(139,92,246,.75)}}
-  .rm-dot{animation:pulse 2.4s infinite ease-in-out}
+  .rm-dot.active{animation:pulse 2.4s infinite ease-in-out}
+  .rm-dot.future{opacity:.38;filter:grayscale(.25);box-shadow:0 0 0 2px rgba(196,181,253,.35),0 0 16px rgba(139,92,246,.28)}
+
+  .rm-card.future{opacity:.6;filter:saturate(.85) grayscale(.05)}
+  .rm-badge.future{opacity:.75;filter:saturate(.8)}
 
   /* Why */
   .why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5)}
@@ -302,14 +315,14 @@
               <stop offset="100%" stop-color="#ff7a00"/>
             </linearGradient>
           </defs>
-        <circle class="ring" cx="110" cy="110" r="88" fill="none" stroke-width="20"/>
-        <circle class="slice" cx="110" cy="110" r="88" fill="none" stroke-width="20"
-                stroke-dasharray="552.92" style="--circ:552.92"
-                transform="rotate(-90 110 110)"/>
-        <circle class="center" cx="110" cy="110" r="70"/>
-        <line class="line" x1="110" y1="110" x2="200" y2="110" stroke-width="2"/>
-        <text class="label" x="60" y="116">100%</text>
-        <text x="110" y="146" text-anchor="middle" fill="#bdbdbd" style="font-weight:700">Community</text>
+          <circle class="ring" cx="110" cy="110" r="88" fill="none" stroke-width="20"/>
+          <circle class="slice" cx="110" cy="110" r="88" fill="none" stroke-width="20"
+                  stroke-dasharray="552.92" style="--circ:552.92"
+                  transform="rotate(-90 110 110)"/>
+          <circle class="center" cx="110" cy="110" r="70"/>
+          <line class="line" x1="110" y1="110" x2="200" y2="110" stroke-width="2"/>
+          <text class="label" x="60" y="116">100%</text>
+          <text x="110" y="146" text-anchor="middle" fill="#bdbdbd" style="font-weight:700">Community</text>
         </svg>
       </div>
     </div>
@@ -343,37 +356,37 @@
     </div>
   </section>
 
-  <!-- ROADMAP (rows, no duplicates) -->
+  <!-- ROADMAP (Phase 3 active; future phases dimmed) -->
   <section id="roadmap" class="roadmap-wrap">
     <div class="container">
       <h2 class="rm-title reveal"><span>Roadmap</span></h2>
-      <p class="rm-sub reveal">Phases from ignition to global expansion. Dates are flexible—weekly prize cycles first.</p>
+      <p class="rm-sub reveal">We’re currently in <b>PHASE 3</b>. Completed/active phases glow; future phases are gently faded.</p>
 
       <div class="rm-grid reveal">
         <div class="rm-line"></div>
 
-        <!-- Row 1 -->
+        <!-- Row 1 (ACTIVE) -->
         <div class="rm-row">
           <div class="rm-card left">
             <span class="rm-badge">Phase 1 • Community Ignition</span>
-            <h4>Set the stage</h4>
+            <h4>SET THE STAGE</h4>
             <ul>
               <li>Open X + Telegram, teaser clips</li>
               <li>Explain weekly SOL prize format</li>
               <li>Early sign-ups for beta access</li>
             </ul>
           </div>
-          <div class="rm-dot" data-step="1"></div>
+          <div class="rm-dot active" data-step="1"></div>
           <div></div>
         </div>
 
-        <!-- Row 2 -->
+        <!-- Row 2 (ACTIVE) -->
         <div class="rm-row">
           <div></div>
-          <div class="rm-dot" data-step="2"></div>
+          <div class="rm-dot active" data-step="2"></div>
           <div class="rm-card right">
             <span class="rm-badge gold">Phase 2 • Web Reveal</span>
-            <h4>Make it real</h4>
+            <h4>MAKE IT REAL</h4>
             <ul>
               <li>Site live: hero, P2E rules, tokenomics (0/0, 100% LP burn)</li>
               <li>How to play: Phantom required; mobile via Phantom in-app</li>
@@ -382,28 +395,28 @@
           </div>
         </div>
 
-        <!-- Row 3 -->
+        <!-- Row 3 (ACTIVE / CURRENT) -->
         <div class="rm-row">
           <div class="rm-card left">
             <span class="rm-badge green">Phase 3 • Game Goes Live</span>
-            <h4>Score submits count</h4>
+            <h4>SCORE SUBMITS COUNT</h4>
             <ul>
               <li>Wallet-signed scores + global leaderboard</li>
               <li>Dry-run week: snapshot → payout test</li>
               <li>Basic anti-cheat thresholds</li>
             </ul>
           </div>
-          <div class="rm-dot" data-step="3"></div>
+          <div class="rm-dot active" data-step="3"></div>
           <div></div>
         </div>
 
-        <!-- Row 4 -->
+        <!-- Row 4 (FUTURE) -->
         <div class="rm-row">
           <div></div>
-          <div class="rm-dot" data-step="4"></div>
-          <div class="rm-card right">
-            <span class="rm-badge green">Phase 4 • Pre-Launch</span>
-            <h4>Tighten the loop</h4>
+          <div class="rm-dot future" data-step="4"></div>
+          <div class="rm-card right future">
+            <span class="rm-badge green future">Phase 4 • Pre-Launch</span>
+            <h4>TIGHTEN THE LOOP</h4>
             <ul>
               <li>Snapshot job (UTC) + payout queue with tx links</li>
               <li>Creator mini-tournaments</li>
@@ -412,28 +425,28 @@
           </div>
         </div>
 
-        <!-- Row 5 -->
+        <!-- Row 5 (FUTURE) -->
         <div class="rm-row">
-          <div class="rm-card left">
-            <span class="rm-badge gold">Phase 5 • Token Launch</span>
-            <h4>Fuel + visibility</h4>
+          <div class="rm-card left future">
+            <span class="rm-badge gold future">Phase 5 • Token Launch</span>
+            <h4>FUEL + VISIBILITY</h4>
             <ul>
               <li>0/0 tax, 100% LP burn, community-owned</li>
               <li>Listings/analytics; site CTAs (Buy / Chart / CA)</li>
               <li>Utility: cosmetics, seasons, events</li>
             </ul>
           </div>
-          <div class="rm-dot" data-step="5"></div>
+          <div class="rm-dot future" data-step="5"></div>
           <div></div>
         </div>
 
-        <!-- Row 6 -->
+        <!-- Row 6 (FUTURE) -->
         <div class="rm-row">
           <div></div>
-          <div class="rm-dot" data-step="6"></div>
-          <div class="rm-card right">
-            <span class="rm-badge">Phase 6 • Global Expansion</span>
-            <h4>Seasons & sponsors</h4>
+          <div class="rm-dot future" data-step="6"></div>
+          <div class="rm-card right future">
+            <span class="rm-badge future">Phase 6 • Global Expansion</span>
+            <h4>SEASONS & SPONSORS</h4>
             <ul>
               <li>Seasonal modes + cosmetic badges for Top 10</li>
               <li>Sponsored prize weeks & themed leaderboards</li>
