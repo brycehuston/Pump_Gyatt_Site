@@ -113,10 +113,10 @@
   .p2e{display:grid;gap:28px;align-items:center;padding:32px var(--s-4);text-align:center}
   .p2e-head{display:flex;flex-direction:column;align-items:center;gap:10px}
   .p2e-h{
-    margin:0;font:900 clamp(20px,2.6vw,28px)/1 Inter,system-ui;letter-spacing:.8px;text-transform:uppercase;
+    margin:0;font:900 clamp(32px,5.4vw,64px)/1.05 Inter,system-ui;letter-spacing:.8px;text-transform:uppercase;
     background:linear-gradient(90deg,var(--money-2), var(--gold), var(--money));
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    text-shadow:0 0 22px rgba(24,224,122,.25), 0 0 18px rgba(255,190,110,.25);
+    text-shadow:0 0 22px rgba(24,224,122,.25), 0 0 18px rgba(255,190,110,.25)
   }
   .p2e-title{font:900 clamp(22px,3vw,34px)/1.2 Inter, system-ui; color:var(--gold); text-shadow:0 0 22px rgba(255,190,110,.35)}
   .p2e-sub{color:#cfeadc}
@@ -129,7 +129,7 @@
   .step h4::after{content:"";display:block;width:88px;height:3px;margin:12px auto 6px;border-radius:999px;background:linear-gradient(90deg, transparent, var(--money), var(--gold), transparent);box-shadow:0 0 14px rgba(24,224,122,.55), 0 0 18px rgba(255,190,110,.35)}
   .step p{margin:0;color:#cfeadc}
 
-  /* ROADMAP — rows, with phase states (active vs future) */
+  /* ROADMAP */
   .roadmap-wrap{
     padding-top:var(--s-6);padding-bottom:var(--s-6);
     background:
@@ -138,8 +138,18 @@
     border-top:1px solid #131313;border-bottom:1px solid #131313;
     position:relative;
   }
-  .rm-title{margin:0 0 8px;text-align:center;font:900 clamp(28px,4.5vw,48px)/1.1 Inter}
-  .rm-title span{background:linear-gradient(90deg,var(--gold),var(--money),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px rgba(255,190,110,.25),0 0 18px rgba(24,224,122,.2)}
+  .rm-title{
+    margin:0 0 8px;
+    text-align:center;
+    font:900 clamp(32px,4.5vw,56px)/1.08 Inter;
+    text-transform:uppercase;          /* <- CAPITALIZED */
+    letter-spacing:.6px;               /* <- tighter like other caps */
+  }
+  .rm-title span{
+    background:linear-gradient(90deg,var(--gold),var(--money),var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 24px rgba(255,190,110,.25),0 0 18px rgba(24,224,122,.2)
+  }
   .rm-sub{color:var(--muted);text-align:center;max-width:70ch;margin:0 auto var(--s-5)}
 
   .rm-grid{position:relative;display:grid;row-gap:36px}
@@ -170,15 +180,8 @@
   @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 4px rgba(196,181,253,.7),0 0 34px rgba(139,92,246,.5)}50%{transform:scale(1.05);box-shadow:0 0 0 6px rgba(196,181,253,.9),0 0 46px rgba(139,92,246,.75)}}
   .rm-dot.active{animation:pulse 2.4s infinite ease-in-out}
   .rm-dot.future{opacity:.38;filter:grayscale(.25);box-shadow:0 0 0 2px rgba(196,181,253,.35),0 0 16px rgba(139,92,246,.28)}
-
   .rm-card.future{opacity:.6;filter:saturate(.85) grayscale(.05)}
   .rm-badge.future{opacity:.75;filter:saturate(.8)}
-
-  /* Why */
-  .why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-5)}
-  .panel h3{margin:.2em 0 .4em;font-size:20px}
-  .muted{color:var(--muted)}
-  .centered{text-align:center}
 
   /* Footer */
   footer{padding:var(--s-6) 0 var(--s-7);color:#9a9a9a;font-size:13px;border-top:1px solid #131313;background:#090909}
@@ -200,14 +203,28 @@
   .notice-inner strong{font-weight:900;letter-spacing:.3px}
   .notice-inner p{margin:0;color:var(--muted)}
 
+  /* --------- MOBILE ROADMAP FIX --------- */
   @media (max-width:1060px){
     .hero-grid,.grid-2,.why,.p2e-steps{grid-template-columns:1fr}
     .hero{min-height:92vh}
     .hero-media img{height:56vh}
-    .rm-row{grid-template-columns:1fr}
+
+    /* Stack each phase vertically: DOT on top, CARD below (1→6) */
+    .rm-row{
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      gap:14px;
+    }
     .rm-line{display:none}
-    .rm-dot{justify-self:center}
+    .rm-dot{
+      order:0;
+      align-self:center;
+      margin-top:2px;
+    }
+    .rm-card{order:1}
     .rm-card.left::after,.rm-card.right::after{display:none}
+    .rm-row > div:empty{display:none}
   }
 </style>
 </head>
@@ -356,16 +373,15 @@
     </div>
   </section>
 
-  <!-- ROADMAP (Phase 3 active; future phases dimmed) -->
+  <!-- ROADMAP -->
   <section id="roadmap" class="roadmap-wrap">
     <div class="container">
-      <h2 class="rm-title reveal"><span>Roadmap</span></h2>
+      <h2 class="rm-title reveal"><span>ROADMAP</span></h2>
       <p class="rm-sub reveal">We’re currently in <b>PHASE 3</b>. Completed/active phases glow; future phases are gently faded.</p>
 
       <div class="rm-grid reveal">
         <div class="rm-line"></div>
 
-        <!-- Row 1 (ACTIVE) -->
         <div class="rm-row">
           <div class="rm-card left">
             <span class="rm-badge">Phase 1 • Community Ignition</span>
@@ -380,7 +396,6 @@
           <div></div>
         </div>
 
-        <!-- Row 2 (ACTIVE) -->
         <div class="rm-row">
           <div></div>
           <div class="rm-dot active" data-step="2"></div>
@@ -395,7 +410,6 @@
           </div>
         </div>
 
-        <!-- Row 3 (ACTIVE / CURRENT) -->
         <div class="rm-row">
           <div class="rm-card left">
             <span class="rm-badge green">Phase 3 • Game Goes Live</span>
@@ -410,7 +424,6 @@
           <div></div>
         </div>
 
-        <!-- Row 4 (FUTURE) -->
         <div class="rm-row">
           <div></div>
           <div class="rm-dot future" data-step="4"></div>
@@ -425,7 +438,6 @@
           </div>
         </div>
 
-        <!-- Row 5 (FUTURE) -->
         <div class="rm-row">
           <div class="rm-card left future">
             <span class="rm-badge gold future">Phase 5 • Token Launch</span>
@@ -440,7 +452,6 @@
           <div></div>
         </div>
 
-        <!-- Row 6 (FUTURE) -->
         <div class="rm-row">
           <div></div>
           <div class="rm-dot future" data-step="6"></div>
